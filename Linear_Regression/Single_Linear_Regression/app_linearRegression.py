@@ -2,7 +2,7 @@ import streamlit as st
 import  seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
-
+from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
@@ -13,8 +13,9 @@ from sklearn.metrics import mean_squared_error, r2_score,mean_absolute_error
 st.set_page_config("Simple Linear Regression", layout="centered")
 
 # load css
-def load_css(file):
-    with open(file) as f:
+def load_css(filename):
+    css_path = Path(__file__).parent / filename
+    with open(css_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 load_css("styles.css")
