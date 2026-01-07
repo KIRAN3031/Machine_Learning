@@ -1,0 +1,162 @@
+/* Import modern Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global app styling */
+.stApp {
+    background : linear-gradient(
+        135deg,
+        #e8f657 0%,
+        #ffffff 50%,
+        #ee5eee 100%
+    );
+}
+
+div.block-container {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 1200px;
+}
+
+/* Hide Streamlit footer and header */
+footer { visibility: hidden; }
+header { visibility: hidden; }
+#MainMenu { visibility: hidden; }
+
+/* Card styling - main feature */
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
+/* Card titles */
+.card h1, .card h3, .card h4 {
+    color: #2d3748;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.card h1 { font-size: 2.5rem; color: #4c51bf; }
+.card h3 { font-size: 1.8rem; color: #2d3748; }
+.card h4 { font-size: 1.3rem; color: #4a5568; }
+
+/* App title specific */
+.card h1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Metrics and preformatted text */
+.card pre {
+    background: #f7fafc;
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    font-family: 'Monaco', monospace;
+    overflow-x: auto;
+}
+
+/* Tables and dataframes */
+.stDataFrame {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.element-container .stDataFrame > div > div {
+    border-radius: 10px;
+}
+
+/* Buttons */
+.stButton > button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+}
+
+/* Sliders and selectboxes */
+.stSlider > div > div > div > div {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.stSelectbox > div > div > div {
+    border-radius: 10px;
+    border: 2px solid #e2e8f0;
+    padding: 0.5rem;
+}
+
+/* Success and info messages */
+.stSuccess {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    border-radius: 12px;
+    padding: 1rem;
+    border-left: 5px solid #2f855a;
+}
+
+.stInfo {
+    background: linear-gradient(135deg, #4299e1, #3182ce);
+    border-radius: 12px;
+    padding: 1rem;
+    border-left: 5px solid #2b6cb0;
+}
+
+/* Lists */
+.card ul {
+    padding-left: 1.5rem;
+}
+
+.card li {
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .card {
+        padding: 1.5rem;
+        margin: 0.5rem;
+    }
+    
+    .card h1 { font-size: 2rem; }
+    .card h3 { font-size: 1.5rem; }
+    
+    div.block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Hide sidebar marker */
+.css-1d391kg { display: none; }
+
+/* Metric containers */
+[data-testid="metric-container"] {
+    background: rgba(255,255,255,0.9);
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
