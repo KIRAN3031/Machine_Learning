@@ -5,5 +5,4 @@ numpy
 matplotlib
 seaborn
 joblib
-flask
 pickle5
