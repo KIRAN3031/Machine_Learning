@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 import warnings
+import os
 warnings.filterwarnings('ignore')
 
 st.set_page_config(page_title="Credit Risk KNN", layout="wide", page_icon="🏦")
@@ -14,7 +15,8 @@ st.set_page_config(page_title="Credit Risk KNN", layout="wide", page_icon="🏦"
 @st.cache_data
 def load_and_preprocess():
     """Load YOUR exact CSV + preprocessing"""
-    df = pd.read_csv('credit_risk_dataset.csv')
+    path = os.path.join(os.path.dirname(__file__), 'data', 'loan_data.csv')
+    df = pd.read_csv(path)
     
     # YOUR outlier removal (<6%)
     numeric_cols = df.select_dtypes(include=np.number).columns
