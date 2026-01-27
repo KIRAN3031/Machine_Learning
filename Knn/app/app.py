@@ -14,7 +14,7 @@ st.set_page_config(page_title="Credit Risk KNN", layout="wide", page_icon="🏦"
 @st.cache_data
 def load_and_preprocess():
     """Load YOUR exact CSV + preprocessing"""
-    df = pd.read_csv(r'C:\Users\KIRAN\OneDrive\Desktop\CSV Files\credit_risk_dataset.csv')
+    df = pd.read_csv('credit_risk_dataset.csv')
     
     # YOUR outlier removal (<6%)
     numeric_cols = df.select_dtypes(include=np.number).columns
