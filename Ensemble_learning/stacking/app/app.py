@@ -6,19 +6,22 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, StackingRegressor
-from sklearn.metrics import mean_squared_error,r2_score
+from sklearn.metrics import r2_score, mean_squared_error
 from xgboost import XGBRegressor
 
 
-# -------------------------------------------------
+# =====================================================
 # Page Config
-# -------------------------------------------------
-st.set_page_config(page_title="House Price Predictor", layout="centered")
+# =====================================================
+st.set_page_config(
+    page_title="House Price Predictor",
+    layout="centered"
+)
 
 
-# -------------------------------------------------
-# Load CSS
-# -------------------------------------------------
+# =====================================================
+# Load External CSS
+# =====================================================
 def load_css():
     with open("styles.css") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -26,13 +29,16 @@ def load_css():
 load_css()
 
 
-st.title("🏠 House Price Prediction App")
-st.write("Stacking Regressor (Random Forest + Gradient Boosting + XGBoost)")
+# =====================================================
+# Title
+# =====================================================
+st.title("🏠 House Price Prediction")
+st.write("Stacking Regressor (RF + GB + XGB)")
 
 
-# -------------------------------------------------
+# =====================================================
 # Load Dataset
-# -------------------------------------------------
+# =====================================================
 @st.cache_data
 def load_data():
     return pd.read_csv("house_data.csv")
@@ -41,9 +47,9 @@ def load_data():
 df = load_data()
 
 
-# -------------------------------------------------
-# Clean Data (Outlier Removal)
-# -------------------------------------------------
+# =====================================================
+# Clean Data (Outliers Removal)
+# =====================================================
 def clean_data(data):
 
     df_clean = data.copy()
@@ -68,55 +74,51 @@ def clean_data(data):
 df = clean_data(df)
 
 
-# -------------------------------------------------
-# Sidebar Dataset Options
-# -------------------------------------------------
+# =====================================================
+# Sidebar - Dataset Options
+# =====================================================
 st.sidebar.header("Dataset Options")
 
-show_preview = st.sidebar.checkbox("Preview Top 5 Rows")
+preview = st.sidebar.checkbox("Preview Top 5")
 show_full = st.sidebar.checkbox("Show Full Dataset")
-show_info = st.sidebar.checkbox("Show Dataset Info")
-download_data = st.sidebar.checkbox("Download CSV")
+info = st.sidebar.checkbox("Dataset Info")
+download = st.sidebar.checkbox("Download CSV")
 
 
-# -------------------------------------------------
-# Dataset Section
-# -------------------------------------------------
-if show_preview:
+if preview:
     st.subheader("Top 5 Rows")
     st.dataframe(df.head(), use_container_width=True)
 
 if show_full:
-    st.subheader("Full Dataset")
+    st.subheader("Complete Dataset")
     st.dataframe(df, use_container_width=True)
 
-if show_info:
+if info:
     st.subheader("Dataset Information")
 
-    col1, col2 = st.columns(2)
-    col1.write(f"Rows: {df.shape[0]}")
-    col1.write(f"Columns: {df.shape[1]}")
-    col2.write("Columns List:")
-    col2.write(list(df.columns))
+    c1, c2 = st.columns(2)
+    c1.write(f"Rows: {df.shape[0]}")
+    c1.write(f"Columns: {df.shape[1]}")
+    c2.write(list(df.columns))
 
-if download_data:
+if download:
     csv = df.to_csv(index=False).encode("utf-8")
 
     st.download_button(
-        label="Download Cleaned Dataset",
+        "Download Cleaned Dataset",
         data=csv,
         file_name="house_data_cleaned.csv",
         mime="text/csv"
     )
 
 
-# -------------------------------------------------
+# =====================================================
 # Train Model
-# -------------------------------------------------
+# =====================================================
 @st.cache_resource
 def train_model(data):
 
-    X = data.drop(columns=['price','date','street','city','statezip','country'])
+    X = data.drop(columns=['price', 'date', 'street', 'city', 'statezip', 'country'])
     y = data['price']
 
     X_train, X_test, y_train, y_test = train_test_split(
@@ -141,10 +143,10 @@ def train_model(data):
 
     model.fit(X_train, y_train)
 
-    y_preds = model.predict(X_test)
+    preds = model.predict(X_test)
 
-    r2 = r2_score(y_test,y_preds)
-    rmse = np.sqrt(mean_squared_error(y_test, y_preds))
+    r2 = r2_score(y_test, preds)
+    rmse = np.sqrt(mean_squared_error(y_test, preds))
 
     return model, scaler, X.columns, r2, rmse
 
@@ -152,19 +154,19 @@ def train_model(data):
 model, scaler, features, r2, rmse = train_model(df)
 
 
-# -------------------------------------------------
-# Model Metrics
-# -------------------------------------------------
+# =====================================================
+# Model Performance
+# =====================================================
 st.subheader("Model Performance")
 
-c1, c2 = st.columns(2)
-c1.metric("R² Score", round(r2, 3))
-c2.metric("RMSE ($)", int(rmse))
+col1, col2 = st.columns(2)
+col1.metric("R² Score", round(r2, 3))
+col2.metric("RMSE ($)", int(rmse))
 
 
-# -------------------------------------------------
+# =====================================================
 # Prediction Section
-# -------------------------------------------------
+# =====================================================
 st.subheader("Enter House Details")
 
 inputs = []
@@ -178,6 +180,20 @@ if st.button("Predict Price"):
 
     arr = np.array(inputs).reshape(1, -1)
     arr = scaler.transform(arr)
+
     prediction = model.predict(arr)[0]
 
-    st.success(f"Estimated Price: ${int(prediction):,}")
+    st.markdown(
+        f"""
+        <div style="
+            background:#e8f5e9;
+            padding:20px;
+            border-radius:12px;
+            text-align:center;
+            font-size:22px;
+            font-weight:bold;">
+            Estimated Price: ${int(prediction):,}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )

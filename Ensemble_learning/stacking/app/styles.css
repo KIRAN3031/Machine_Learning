@@ -1,21 +1,96 @@
-body {
-    background-color: #f4f6f8;
-}
-
+/* -----------------------------
+   App Background
+------------------------------*/
 .stApp {
-    font-family: Arial, sans-serif;
+    background: linear-gradient(
+        135deg,
+        #f5f7fa 0%,
+        #e3f2fd 50%,
+        #fce4ec 100%
+    );
+    font-family: "Segoe UI", sans-serif;
 }
 
+
+/* -----------------------------
+   Headings
+------------------------------*/
 h1 {
-    color: #2c3e50;
     text-align: center;
+    color: #2c3e50;
+    font-weight: 700;
 }
 
-.stButton>button {
-    background-color: #2ecc71;
+h2, h3 {
+    color: #34495e;
+    font-weight: 600;
+}
+
+
+/* -----------------------------
+   Cards / Containers
+------------------------------*/
+.block-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+
+/* -----------------------------
+   Buttons
+------------------------------*/
+.stButton > button {
+    background-color: #4f46e5;
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     height: 45px;
     width: 200px;
     font-size: 16px;
+    font-weight: 600;
+    border: none;
+    transition: 0.3s;
+}
+
+.stButton > button:hover {
+    background-color: #3730a3;
+    transform: scale(1.03);
+}
+
+
+/* -----------------------------
+   Input Fields
+------------------------------*/
+input, .stNumberInput input {
+    border-radius: 8px !important;
+}
+
+
+/* -----------------------------
+   Metrics Styling
+------------------------------*/
+div[data-testid="metric-container"] {
+    background-color: #f8fafc;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+
+/* -----------------------------
+   Success / Prediction Box
+------------------------------*/
+.stAlert {
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+
+/* -----------------------------
+   Sidebar
+------------------------------*/
+section[data-testid="stSidebar"] {
+    background-color: #ffffff;
+    border-right: 1px solid #e5e7eb;
 }
