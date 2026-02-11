@@ -1,0 +1,32 @@
+.stApp {
+    background: linear-gradient(135deg, #f1f5f9, #ffffff);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+/* Titles */
+h1, h2, h3 {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+
+/* Metric/boxes look */
+div[data-testid="stMetric"] {
+    background-color: white;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #f8fafc;
+}
+
+
+/* Tables */
+[data-testid="stDataFrame"] {
+    border-radius: 10px;
+}
