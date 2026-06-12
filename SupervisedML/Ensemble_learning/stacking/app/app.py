@@ -8,7 +8,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, StackingRegressor
 from sklearn.metrics import r2_score, mean_squared_error
 from xgboost import XGBRegressor
+import os
 
+BASEDIR = os.path.dirname(__file__)
 
 # =====================================================
 # Page Config
@@ -23,7 +25,7 @@ st.set_page_config(
 # Load External CSS
 # =====================================================
 def load_css():
-    with open("styles.css") as f:
+    with open(os.path.join(BASEDIR, "styles.css")) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 load_css()
@@ -41,7 +43,7 @@ st.write("Stacking Regressor (RF + GB + XGB)")
 # =====================================================
 @st.cache_data
 def load_data():
-    return pd.read_csv("house_data.csv")
+    return pd.read_csv(os.path.join(BASEDIR, "house_data.csv"))
 
 
 df = load_data()
@@ -107,7 +109,7 @@ if download:
     st.download_button(
         "Download Cleaned Dataset",
         data=csv,
-        file_name="house_data_cleaned.csv",
+        file_name=os.path.join(BASEDIR, "house_data_cleaned.csv"),
         mime="text/csv"
     )
 
