@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
-
+import os
 
 # -------------------------
 # Page Config
@@ -17,7 +17,7 @@ st.set_page_config(page_title="Customer Segmentation", layout="centered")
 # Load CSS
 # -------------------------
 def load_css():
-    with open("styles.css") as f:
+    with open(os.path.join(BASEDIR, "styles.css")) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 load_css()
@@ -33,9 +33,10 @@ st.write("KMeans Clustering based on Milk & Grocery Spending")
 # -------------------------
 # Load Dataset
 # -------------------------
+BASEDIR = os.path.dirname(__file__)
 @st.cache_data
 def load_data():
-    return pd.read_csv("Wholesale customers data.csv")
+    return pd.read_csv(os.path.join(BASEDIR, "Wholesale customers data.csv"))
 
 df = load_data()
 
