@@ -12,10 +12,11 @@ warnings.filterwarnings('ignore')
 
 st.set_page_config(page_title="Credit Risk KNN", layout="wide", page_icon="🏦")
 
+BASEDIR = os.path.dirname(__file__)
 @st.cache_data
 def load_and_preprocess():
     """Load YOUR exact CSV + preprocessing"""
-    path = os.path.join(os.path.dirname(__file__), 'data', 'credit_risk_dataset.csv')
+    path = os.path.join(BASEDIR, 'credit_risk_dataset.csv')
     df = pd.read_csv(path)
     
     # YOUR outlier removal (<6%)
