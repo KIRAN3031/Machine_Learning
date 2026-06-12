@@ -12,7 +12,7 @@ import os
 # -------------------------
 st.set_page_config(page_title="Customer Segmentation", layout="centered")
 
-
+BASEDIR = os.path.dirname(__file__)
 # -------------------------
 # Load CSS
 # -------------------------
@@ -33,7 +33,7 @@ st.write("KMeans Clustering based on Milk & Grocery Spending")
 # -------------------------
 # Load Dataset
 # -------------------------
-BASEDIR = os.path.dirname(__file__)
+
 @st.cache_data
 def load_data():
     return pd.read_csv(os.path.join(BASEDIR, "Wholesale customers data.csv"))
